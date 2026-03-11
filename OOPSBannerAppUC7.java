@@ -1,0 +1,77 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class OOPSBannerAppUC7 {
+
+    // Static Inner Class to encapsulate character and pattern
+    static class CharacterPatternMap {
+        private char character;
+        private String[] pattern;
+
+        public CharacterPatternMap(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // Centralized Pattern Storage
+        Map<Character, CharacterPatternMap> patternMap = new HashMap<>();
+
+        patternMap.put('O', new CharacterPatternMap('O', new String[]{
+                " ***** ",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                " ***** "
+        }));
+
+        patternMap.put('P', new CharacterPatternMap('P', new String[]{
+                "****** ",
+                "*     *",
+                "*     *",
+                "****** ",
+                "*      ",
+                "*      ",
+                "*      "
+        }));
+
+        patternMap.put('S', new CharacterPatternMap('S', new String[]{
+                " ***** ",
+                "*     *",
+                "*      ",
+                " ***** ",
+                "      *",
+                "*     *",
+                " ***** "
+        }));
+
+        String word = "OOPS";
+        int height = 7;
+
+        // Render banner using StringBuilder
+        for (int i = 0; i < height; i++) {
+            StringBuilder line = new StringBuilder();
+
+            for (char c : word.toCharArray()) {
+                CharacterPatternMap cp = patternMap.get(c);
+                if (cp != null) {
+                    line.append(cp.getPattern()[i]).append("   ");
+                }
+            }
+
+            System.out.println(line);
+        }
+    }
+}
